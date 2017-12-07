@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:3.7
 # In case the main package repositories are down, use the alternative base image:
 # FROM gliderlabs/alpine:3.4
 
@@ -47,7 +47,7 @@ RUN rm -rf /tmp/*
 #### ADD DEFAULT USER ####
 ARG USER=mpi
 ENV USER ${USER}
-RUN adduser -D ${USER} \
+RUN adduser -D ${USER} -s /bin/ash \
       && echo "${USER}   ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 ENV USER_HOME /home/${USER}
