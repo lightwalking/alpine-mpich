@@ -2,7 +2,7 @@ FROM alpine:3.7
 # In case the main package repositories are down, use the alternative base image:
 # FROM gliderlabs/alpine:3.4
 
-MAINTAINER Nikyle Nguyen <NLKNguyen@MSN.com>
+LABEL maintainer="lightwalking"
 
 ARG REQUIRE="sudo build-base"
 RUN apk update && apk upgrade \
