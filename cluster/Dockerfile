@@ -1,4 +1,4 @@
-FROM nlknguyen/alpine-mpich:onbuild
+FROM lightwalking/alpine-mpich:onbuild
 
 # # ------------------------------------------------------------
 # # Build MPI project
