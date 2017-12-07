@@ -14,7 +14,7 @@ Push to Docker Hub [https://hub.docker.com/r/lightwalking/alpine-mpich](https://
 `cluster` ([project scaffolder](https://github.com/lightwalking/alpine-mpich/tree/master/cluster)) : is a directory containing a setup for deploying MPI programs to a cluster of containers. Include a runner script to automate Docker commands.
 
 
-*Below is instruction for building the Docker image yourself if you don't want to use the pre-built base or onbuild image.*
+*Below is instruction for building the Docker images yourself if you don't want to use the pre-built base or onbuild image.*
 
 ----
 
