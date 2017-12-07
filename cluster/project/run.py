@@ -46,15 +46,15 @@ if not program_to_run in programs:
     print 'Must enter program name to run. Possible programs are: {0}'.format(programs.keys())
 else:
     # Try to compile before running
-    with open(os.devnull, 'wb') as devnull:
-        subprocess.call(
-            ['cd ./{0}/code && make'.format(programs[program_to_run][0])],
-            stdout=devnull, stderr=subprocess.STDOUT, shell=True)
+#    with open(os.devnull, 'wb') as devnull:
+#        subprocess.call(
+#            ['cd ./{0} && make'.format(programs[program_to_run][0])],
+#            stdout=devnull, stderr=subprocess.STDOUT, shell=True)
 
     mpirun = os.environ.get('MPIRUN', 'mpirun')
     hosts = '' if not os.environ.get('MPI_HOSTS') else '-f {0}'.format(os.environ.get('MPI_HOSTS'))
 
-    sys_call = '{0} -n {1} {2} ./{3}/code/{4}'.format(
+    sys_call = '{0} -n {1} {2} ./{3}/{4}'.format(
         mpirun, programs[program_to_run][1], hosts, programs[program_to_run][0], program_to_run)
 
     if len(programs[program_to_run]) > 2:
