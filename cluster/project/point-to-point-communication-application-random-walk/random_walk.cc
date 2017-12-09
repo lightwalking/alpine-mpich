@@ -127,10 +127,14 @@ int main(int argc, char** argv) {
   // Initialize walkers in your subdomain
   initialize_walkers(num_walkers_per_proc, max_walk_size, subdomain_start,
                      &incoming_walkers);
-
+  printf("Process %d initiated %d walkers in subdomain %d - %d\n"
+	, world_rank, num_walkers_per_proc, subdomain_start
+	, subdomain_start + subdomain_size - 1);
+/*
   cout << "Process " << world_rank << " initiated " << num_walkers_per_proc
        << " walkers in subdomain " << subdomain_start << " - "
        << subdomain_start + subdomain_size - 1 << endl;
+*/
 
   // Determine the maximum amount of sends and receives needed to
   // complete all walkers
@@ -141,9 +145,13 @@ int main(int argc, char** argv) {
        walk(&incoming_walkers[i], subdomain_start, subdomain_size,
             domain_size, &outgoing_walkers);
     }
+    printf("Process %d sending %d outgoing walkers to process %d\n"
+	, world_rank, outgoing_walkers.size(), (world_rank + 1) % world_size);
+/*
     cout << "Process " << world_rank << " sending " << outgoing_walkers.size()
          << " outgoing walkers to process " << (world_rank + 1) % world_size
          << endl;
+*/
     if (world_rank % 2 == 0) {
       // Send all outgoing walkers to the next process.
       send_outgoing_walkers(&outgoing_walkers, world_rank,
@@ -159,10 +167,17 @@ int main(int argc, char** argv) {
       send_outgoing_walkers(&outgoing_walkers, world_rank,
                             world_size);
     }
+    printf("Process %d received %d incoming walkers\n"
+	, world_rank, incoming_walkers.size());
+/*
     cout << "Process " << world_rank << " received " << incoming_walkers.size()
          << " incoming walkers" << endl;
+*/
   }
+  printf("Process %d done\n", world_rank);
+/*
   cout << "Process " << world_rank << " done" << endl;
+*/
   MPI_Finalize();
   return 0;
 }
