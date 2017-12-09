@@ -203,7 +203,6 @@ up_workers ()
         --name %s \\
         --replicas %s \\
         --network %s \\
-        --constraint 'node.role == worker' \\
         --user root \\
         %s mpi_bootstrap \\
             mpi_master_service_name=%s \\
@@ -218,7 +217,6 @@ up_workers ()
         --name ${MPI_WORKER_SERVICE_NAME}      \
         --replicas ${NUM_WORKER}               \
         --network ${NETWORK_NAME}              \
-        --constraint 'node.role == worker'     \
         --user root                            \
         "${IMAGE_TAG}" mpi_bootstrap             \
                     mpi_master_service_name=${MPI_MASTER_SERVICE_NAME} \
