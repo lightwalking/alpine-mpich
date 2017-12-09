@@ -4,5 +4,6 @@
 # shellcheck disable=SC1091
 . /etc/opt/service_names
 
-( netstat -t | grep ESTABLISHED | awk '{print $5}' | grep "$MPI_WORKER_SERVICE_NAME" | cut -d: -f1  \
+( nslookup tasks.$MPI_WORKER_SERVICE_NAME 127.0.0.11 \
+| grep mpi-network | awk -F ' ' '{print $3}' | cut -d: -f1 \
 & getent hosts "$MPI_MASTER_SERVICE_NAME" | cut -d' ' -f1 ) | sort -u
